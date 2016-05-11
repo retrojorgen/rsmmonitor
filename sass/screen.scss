@@ -1,0 +1,341 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "compass/reset";
+@import "compass";
+
+body,html {
+	margin: 0;
+	background-color: #d80000;
+	width: 1920px;
+	height: 1080px;
+	overflow: hidden;
+
+}
+
+@include font-face("retrofont", font-files("../VT323-Regular.ttf"));
+
+#info {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 1080px;
+	width: 400px;
+	text-align: center;
+	background-color: rgba(0,0,0,0.8);
+	padding: 20px;
+	h1 {
+		font-family: "retrofont";
+		font-size: 60px;
+		text-transform: uppercase;
+		z-index: 100;
+   		color: white;
+   		padding: 1px;
+	   text-shadow:
+	       3px 3px 0 #000,
+	     -1px -1px 0 #000,  
+	      1px -1px 0 #000,
+	      -1px 1px 0 #000,
+	       1px 1px 0 #000;
+	}
+	table {
+		tr {
+			padding: 40px;
+			text-align: left;
+			border-bottom: 25px solid transparent;
+			td {
+				padding-top: 40px;
+				font-family: "retrofont";
+						font-size: 30px;
+						text-transform: uppercase;
+						z-index: 100;
+				   		color: yellow;
+				   		padding: 1px;
+					   text-shadow:
+					       3px 3px 0 #000,
+					     -1px -1px 0 #000,  
+					      1px -1px 0 #000,
+					      -1px 1px 0 #000,
+					       1px 1px 0 #000;		
+					       &::first-line {
+					       		color: white;
+					       	} 
+			}
+			td:nth-child(2) {
+				font-size: 26px;
+			}
+		}
+	}
+}
+
+	.cover {
+		width: 409px;
+		height: 410px;
+		right: 0;
+		top: 0;
+		position: absolute;
+		z-index: 100;
+		background: {
+			image: url(../cover.png);
+			repeat: no-repeat;
+		}
+		&#cov-1 {
+			right: 61px;
+			top: 101px;
+		}
+		&#cov-2 {
+			right: 481px;
+			top: 101px;
+		}
+		&#cov-3 {
+			right: 901px;
+			top: 101px;
+		}
+		&#cov-4 {
+			right: 61px;
+			top: 521px;
+		}
+		&#cov-5 {
+			right: 481px;
+			top: 521px;
+		}
+		&#cov-6 {
+			right: 901px;
+			top: 521px;
+		}
+	}
+
+.container { 
+	width: 370px;
+	height: 370px;
+	position: absolute;
+	perspective: 1400px;
+	z-index: 100;
+}
+
+	.user {
+		font-family: "retrofont";
+		position: absolute;
+		top: -20px;
+		left: 0;
+		width: 100%;
+		text-align: center;
+		font-size: 30px;
+		text-transform: uppercase;
+		z-index: 100;
+   		color: white;
+   		padding: 1px;
+	   text-shadow:
+	       3px 3px 0 #000,
+	     -1px -1px 0 #000,  
+	      1px -1px 0 #000,
+	      -1px 1px 0 #000,
+	       1px 1px 0 #000;
+	}
+
+.card {
+  	width: 100%;
+  	height: 100%;
+  	position: absolute;
+  	z-index: 100;
+  	transform-style: preserve-3d;
+  	transition: transform 1s;
+
+	&.flipped {
+	  transform: rotateY( 180deg );
+	}
+	figure {
+		margin: 0;
+		display: block;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		backface-visibility: hidden;
+	}
+
+	.front {
+		background: red;
+		background-size: cover;
+		font-family: "retrofont";
+		position: absolute;
+		top: -20px;
+		width: 100%;
+		text-align: center;
+		font-size: 30px;
+		text-transform: uppercase;
+		z-index: 100;
+   		color: white;
+   		opacity: 0.8;
+	  	&.pow-mario,
+	  	&.pow-luigi {
+	  		&:after {
+	  			content: "";
+				position: absolute;
+		  		top: 147px;
+		  		left: 158px;
+		  		background-image: url(../mario-smash.png);
+		  		width: 50px;
+		  		height: 74px;
+	  		}
+	  		
+	  	}
+
+	}
+	.back {
+  		background: blue;
+  		transform: rotateY( 180deg );
+  		background-size: cover;
+		font-family: "retrofont";
+		position: absolute;
+		top: -20px;
+		width: 100%;
+		text-align: center;
+		font-size: 30px;
+		text-transform: uppercase;
+		z-index: 100;
+   		color: white;
+   		opacity: 0.8;
+	}
+	.cover2 {
+		width: 389px;
+		height: 388px;
+		left: -10px;
+		top: -9px;
+		position: absolute;
+		background: {
+			image: url(../inner-cover-2.png);
+			repeat: no-repeat;
+		}
+	}
+}
+
+.mario {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	background:  {
+		image: url(../mario-climbing.gif);
+		repeat: no-repeat;
+		position: top left;
+	}
+	width: 50px;
+	height: 77px;
+	&.smash {
+		background-image: url(../mario-smash.png);
+	}
+}
+.mario {
+	z-index: 101;
+	&.luigi {
+		background-image: url(../luigi-climbing.gif);
+		&.smash {
+			background-image: url(../luigi-climbing-smash.gif);
+		}
+	}
+	&.back {
+		z-index: 98;
+		background-image: url(../mario-climbing-back.gif);
+		&.smash {
+			background-image: url(../mario-climbing-back.gif);
+		}
+		&.luigi {
+			background-image: url(../luigi-climbing-back.gif);
+			&.smash {
+				background-image: url(../luigi-climbing-back.gif);
+			}
+		}
+	}
+}
+
+#instatitle {
+	font-family: "retrofont";
+	font-size: 60px;
+	position: absolute;
+	display: inline-block;
+	right: 300px;
+	color: white;
+	text-transform: uppercase;
+	background-color: black;
+	padding: 10px;
+	z-index: 1000;
+}
+
+#card-1 {
+	right: 80px;
+	top: 140px;
+}
+
+#card-2 {
+	right: 500px;
+	top: 140px;
+}
+
+#card-3 {
+	right: 920px;
+	top: 140px;
+}
+
+#card-4 {
+	right: 80px;
+	top: 560px;
+}
+
+#card-5 {
+	right: 500px;
+	top: 560px;
+}
+
+#card-6 {
+	right: 920px;
+	top: 560px;
+}
+
+#temple {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 1920px;
+	height: 984px;
+	background-image: url(../templebackground.png);
+}
+
+#top-blocks {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 1920px;
+	height: 144px;
+	background-image: url(../top-blocks.png);
+}
+#grid {
+	position: absolute;
+	top: 45px;
+	right: 16px;
+	width: 1494px;
+	height: 920px;
+	z-index: 99;
+	background-image: url(../grid2.png);
+}
+#flames {
+	position: absolute;
+	top: 967px;
+	width: 1920px;
+	left: 0;
+	height: 100px;
+	background: {
+		image: url(../flames.gif);
+		repeat: repeat-x;
+		color: transparant;
+	}
+
+}
+
+#flip {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 100;
+}

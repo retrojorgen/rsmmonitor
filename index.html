@@ -1,0 +1,272 @@
+<!doctype html>
+<head>
+    <link rel="stylesheet" type="text/css" href="stylesheets/screen.css">
+</head>
+<body>
+
+
+
+<div id="temple"></div>
+<div id="top-blocks"></div>
+<div id="flames"></div>
+<div id="grid"></div>
+<div id="column"></div>
+<h1 id="instatitle">Instagram - #Retrospillmessen</h1>
+<div class="cover" id="cov-1"></div>
+<div class="cover"  id="cov-2"></div>
+<div class="cover"  id="cov-3"></div>
+<div class="cover" id="cov-4"></div>
+<div class="cover"  id="cov-5"></div>
+<div class="cover" id="cov-6"></div>
+
+<div class="mario" id="char-1" data-card="1"></div>
+<div class="mario back luigi"  id="char-2"  data-card="2"></div>
+<div class="mario"  id="char-3"  data-card="3"></div>
+<div class="mario back luigi" id="char-4"  data-card="4"></div>
+<div class="mario"  id="char-5"  data-card="5"></div>
+<div class="mario back luigi" id="char-6"  data-card="6"></div>
+<section class="container" id="card-1">
+
+  <div class="card">
+    <figure class="front">
+        <span class="user">bla</span>
+        <div class="cover2"></div>
+    </figure>
+    <figure class="back">
+        <span class="user">bla</span>
+        <div class="cover2"></div>
+    </figure>
+  </div>
+</section>
+
+<section class="container" id="card-2">
+  <div class="card flipped">
+    <figure class="front">
+        <span class="user">bla</span>
+        <div class="cover2"></div>
+    </figure>
+    <figure class="back">
+        <span class="user">bla</span>
+        <div class="cover2"></div>
+    </figure>
+  </div>
+</section>
+
+<section class="container" id="card-3">
+
+  <div class="card">
+    <figure class="front">
+        <span class="user">bla</span>
+        <div class="cover2"></div>
+    </figure>
+    <figure class="back">
+        <span class="user">bla</span>
+        <div class="cover2"></div>
+    </figure>
+  </div>
+</section>
+
+<section class="container" id="card-4">
+  <div class="card flipped">
+    <figure class="front">
+        <span class="user">bla</span>
+        <div class="cover2"></div>
+    </figure>
+    <figure class="back">
+        <span class="user">bla</span>
+        <div class="cover2"></div>
+    </figure>
+  </div>
+</section>
+
+<section class="container" id="card-5">
+  <div class="card">
+    <figure class="front">
+        <span class="user">bla</span>
+        <div class="cover2"></div>
+    </figure>
+    <figure class="back">
+        <span class="user">bla</span>
+        <div class="cover2"></div>
+    </figure>
+  </div>
+</section>
+
+<section class="container" id="card-6">
+  <div class="card flipped">
+    <figure class="front">
+        <span class="user">bla</span>
+        <div class="cover2"></div>
+    </figure>
+    <figure class="back">
+        <span class="user">bla</span>
+        <div class="cover2"></div>
+    </figure>
+  </div>
+</section>
+
+<div id="info">
+    <h1>Program</h1>
+    <table>
+        <tr>
+            <td>10:30-12:00</td>
+            <td>Registrering til Tekken 3<br>Playstation</td>
+        </tr>
+        <tr>
+            <td>10:30-11:30</td>
+            <td>Kvalifisering til Super Mario Bros<br>Scenen</td>
+        </tr>
+        <tr>
+            <td>11:30-12:30</td>
+            <td>Finale Super Mario Bros<br>Scenen</td>
+        </tr>
+        <tr>
+            <td>13:00-15:00</td>
+            <td>Tekken 3 turnering starter<br>Playstation</td>
+        </tr>
+        <tr>
+            <td>15:00-16:00</td>
+            <td>Tekken semifinale og finale<br>Scenen</td>
+        </tr>
+        <tr>
+            <td>ca 16:00</td>
+            <td>Oppvarmingsband<br>Scenen</td>
+        </tr>
+        <tr>
+            <td>ca 16:30</td>
+            <td>Brentalfloss spiller<br>Scenen</td>
+        </tr>
+    </table>
+
+</div>
+
+
+<button id="flip">Flip</button>
+
+
+<div class="instagram"></div>
+
+<script src="jquery.min.js"></script>
+<script src="TweenMax.min.js"></script>
+<script src="instagram.js"></script>
+<script>
+jQuery(function($) {
+
+    var tweens = {};
+
+    var centerCharacter = function(character, callback) {
+        var card = $("#card-" + character.split("-")[1]);
+        $("#" + character).css({
+            "left": card.offset().left + (card.outerWidth(true)/2) - 25,
+            "top": card.offset().top + (card.outerHeight(true)/2) - 38
+        });
+        TweenMax.to("#" + character, 1, {y: 0, x: 0, ease:Linear.easeNone, onComplete: callback});
+    };
+
+    var moveAroundCharacter = function(character, time, callback) {
+        var xPlus = 0;
+        var yPlus = 0;
+        tweens[character] = {
+            data: false,
+            interval: false
+        }
+
+        console.log(tweens);
+        
+        tweens[character].interval = setInterval(function() {
+
+            xPlus = Math.floor((Math.random() * -280) + 180);
+            yPlus = Math.floor((Math.random() * -280) + 180);
+            tweens[character].data = TweenMax.to("#" + character, 1, {y: xPlus, x: yPlus, ease:Linear.easeNone});
+        }, 1000);
+    };
+
+    var getNewInstagramPhotos = function (callback) {
+
+        instagramRequest({
+            hash: 'retrospillmessen',
+            clientId: '046b08d202094c94ab1fbae69dd0776c'
+        }, function(response) {
+            if(response.data && response.data.length >= 10) {
+                callback(response.data);
+            }
+      });
+
+    };
+
+    var drawImages = function (images, callback){
+        $(".container").each(function (num) {
+            if($(this).children('.card').hasClass('flipped')) {
+                $(this).find(".front").css("background-image", "url(" + images[num].images["standard_resolution"].url + ")").find(".user").text("@" + images[num].user["full_name"]);
+            } else {
+                $(this).find(".back").css("background-image", "url(" + images[num].images["standard_resolution"].url + ")").find(".user").text("@" + images[num].user["full_name"]);
+            }
+        });
+        callback();
+    };
+
+
+    var changeChar = function (char, intervalLength) {
+        setTimeout(function() {
+            clearInterval(tweens["char-" + char].interval);
+            centerCharacter("char-" + char, function () {
+                console.log("#card-" + char);
+                var card = $("#card-" + char).find(".card");
+                $("#char-" + char).hide().toggleClass("back");
+                if(card.hasClass('flipped')) {
+                    card.children(".back").addClass('pow-mario')
+                } else {
+                    card.children(".front").addClass('pow-mario')
+                }
+                card.toggleClass("flipped");
+                setTimeout(function() {
+                   
+                   card.children().removeClass('pow-mario') 
+                   moveAroundCharacter("char-" + char, 25);
+                    $("#char-" + char).show();
+                }, 1000);
+            });
+        }, intervalLength);
+    };
+  
+
+    var loop = function () {
+        getNewInstagramPhotos(function(data) {
+            console.log(data);
+            drawImages(data, function () {
+
+                
+                changeChar("1", 0);
+                changeChar("2", 5000);
+                changeChar("3", 10000);
+                changeChar("4", 15000);
+                changeChar("5", 20000);
+                changeChar("6", 25000);
+
+
+
+                setTimeout(function() {
+                    loop();
+                }, 35000)
+            });
+        });
+    };
+
+    $('#flip').on('click', function() {
+        $('.card').toggleClass('flipped');
+    });
+
+    $(".mario").each (function (num) {
+        var id = $(this).attr("id");
+        centerCharacter($(this).attr("id"), function() {
+            moveAroundCharacter(id, 25);
+            if(num == 5) {
+                loop();
+            }
+        });
+    });
+    
+});
+</script>
+
+</body>
